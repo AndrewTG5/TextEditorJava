@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.texteditor.MainController">
+   <top>
+       <MenuBar BorderPane.alignment="CENTER">
+           <Menu mnemonicParsing="false" text="File">
+               <MenuItem mnemonicParsing="false" text="New" onAction="#onNew"/>
+               <MenuItem mnemonicParsing="false" text="Open" onAction="#onOpen"/>
+               <MenuItem mnemonicParsing="false" text="Save" onAction="#onSave"/>
+               <MenuItem mnemonicParsing="false" text="Save as" onAction="#onSaveAs"/>
+               <MenuItem mnemonicParsing="false" text="Exit" onAction="#onExit"/>
+           </Menu>
+           <Menu mnemonicParsing="false" text="Help">
+               <MenuItem mnemonicParsing="false" text="About"/>
+           </Menu>
+       </MenuBar>
+   </top>
+   <bottom>
+      <HBox prefHeight="30.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
+   </bottom>
+   <center>
+      <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
