@@ -24,6 +24,10 @@ public class MainApplication extends Application {
         launch();
     }
 
+    /**
+     * Opens a file chooser dialog and returns the selected file.
+     * @return The selected file
+     */
     public static File getFile() {
         FileChooser fileChooser = new FileChooser();
         // specify allowed file types
@@ -34,6 +38,11 @@ public class MainApplication extends Application {
         return fileChooser.showOpenDialog(null);
     }
 
+    /**
+     * Reads a file and returns its content.
+     * @param file The file to read. Usually obtained from getFile().
+     * @return The content of the file.
+     */
     public static String readFile(File file) {
         StringBuilder content = new StringBuilder();
         try {
@@ -51,5 +60,37 @@ public class MainApplication extends Application {
             ex.printStackTrace();
         }
         return content.toString();
+    }
+
+    /**
+     * Opens a file chooser dialog and returns the File to save to.
+     * @return The File to save to.
+     */
+    public static File chooseSaveFile() {
+        FileChooser fileChooser = new FileChooser();
+        // specify allowed file types
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt"));
+        //set initial directory
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+
+        return fileChooser.showSaveDialog(null);
+    }
+
+    /**
+     * Saves a file.
+     * @param file The file to save. Usually obtained from chooseSaveFile() or getFile().
+     * @param content The content to save.
+     */
+    public static void saveFile(File file, String content) {
+        try {
+            // FileWriter overwrites any existing file.
+            java.io.FileWriter fileWriter = new java.io.FileWriter(file);
+            // Always wrap FileWriter in BufferedWriter.
+            java.io.BufferedWriter bufferedWriter = new java.io.BufferedWriter(fileWriter);
+            bufferedWriter.write(content);
+            bufferedWriter.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
