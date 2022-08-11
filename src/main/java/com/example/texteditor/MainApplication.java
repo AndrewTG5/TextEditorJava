@@ -93,4 +93,13 @@ public class MainApplication extends Application {
             ex.printStackTrace();
         }
     }
+
+    /**
+     * Returns a string with the current date and time.
+     * @return A string with the current date and time.
+     */
+    public static String getCurrentDateTime() {
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm aa yyyy/MM/dd");
+        return sdf.format(new java.util.Date());
+    }
 }

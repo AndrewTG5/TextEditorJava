@@ -38,4 +38,21 @@ public class MainController {
     public void onExit() {
         System.exit(0);
     }
+
+    public void onDate() {
+        // passing 0 will insert the date at the very beginning of the textArea
+        textArea.insertText(0, MainApplication.getCurrentDateTime());
+    }
+
+    public void onCut() {
+    }
+
+    public void onCopy() {
+    }
+
+    public void onPaste() {
+    }
+
+    public void onSelectAll() {
+    }
 }
