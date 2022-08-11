@@ -13,6 +13,13 @@
                <MenuItem mnemonicParsing="false" onAction="#onSaveAs" text="Save as" />
                <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit" />
            </Menu>
+           <Menu mnemonicParsing="false" text="Edit">
+               <MenuItem mnemonicParsing="false" onAction="#onCut" text="Cut" />
+               <MenuItem mnemonicParsing="false" onAction="#onCopy" text="Copy" />
+               <MenuItem mnemonicParsing="false" onAction="#onPaste" text="Paste" />
+               <MenuItem mnemonicParsing="false" onAction="#onSelectAll" text="Select all" />
+               <MenuItem mnemonicParsing="false" onAction="#onDate" text="Time/Date" />
+           </Menu>
            <Menu mnemonicParsing="false" text="Help">
                <MenuItem mnemonicParsing="false" text="About" />
            </Menu>
