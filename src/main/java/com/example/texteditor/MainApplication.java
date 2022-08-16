@@ -1,6 +1,7 @@
 package com.example.texteditor;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
@@ -11,16 +12,14 @@ import java.io.IOException;
 
 public class MainApplication extends Application {
 
-    MainController controller;
-
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        controller = fxmlLoader.getController();
+        MainController controller = fxmlLoader.getController();
         stage.setTitle("Text Editor");
         stage.setScene(scene);
-        stage.setOnCloseRequest(e -> controller.onExit());
+        stage.setOnCloseRequest(e -> {controller.onExit(); Platform.exit();});
         stage.show();
     }
 
@@ -120,5 +119,23 @@ public class MainApplication extends Application {
             return true;
         }
         return !readFile(file).equals(content);
+    }
+
+    /**
+     * Opens a new stage.
+     */
+    public static void newWindow() {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            MainController controller = fxmlLoader.getController();
+            stage.setTitle("Text Editor");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(e -> {controller.onExit();stage.close();});
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
