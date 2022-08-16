@@ -17,7 +17,7 @@ public class MainApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         MainController controller = fxmlLoader.getController();
-        stage.setTitle("Text Editor");
+        stage.setTitle("Text Editor: Primary window");
         stage.setScene(scene);
         stage.setOnCloseRequest(e -> {controller.onExit(); Platform.exit();});
         stage.show();
