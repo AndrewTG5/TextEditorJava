@@ -11,12 +11,16 @@ import java.io.IOException;
 
 public class MainApplication extends Application {
 
+    MainController controller;
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        controller = fxmlLoader.getController();
         stage.setTitle("Text Editor");
         stage.setScene(scene);
+        stage.setOnCloseRequest(e -> {controller.onNew(); System.exit(0);});
         stage.show();
     }
 
@@ -101,5 +105,20 @@ public class MainApplication extends Application {
     public static String getCurrentDateTime() {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("HH:mm aa yyyy/MM/dd");
         return sdf.format(new java.util.Date());
+    }
+
+    /**
+     * Returns true if the file has not been saved.
+     * @param file The file to check. Can be null
+     * @param content The content of the editor
+     * @return True if the file has not been saved.
+     */
+    public static boolean isUnsaved(File file, String content) {
+        if (file == null && content.isEmpty()) {
+            return false;
+        } else if (file == null) {
+            return true;
+        }
+        return !readFile(file).equals(content);
     }
 }
