@@ -20,7 +20,7 @@ public class MainApplication extends Application {
         controller = fxmlLoader.getController();
         stage.setTitle("Text Editor");
         stage.setScene(scene);
-        stage.setOnCloseRequest(e -> {controller.onExit(); System.exit(0);});
+        stage.setOnCloseRequest(e -> controller.onExit());
         stage.show();
     }
 
