@@ -48,6 +48,7 @@ public class MainController {
     }
 
     public void onExit() {
+        onNew();
         System.exit(0);
     }
 
