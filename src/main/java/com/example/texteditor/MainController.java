@@ -13,18 +13,7 @@ public class MainController {
     private File currentFile = null;
 
     public void onNew() {
-        if (MainApplication.isUnsaved(currentFile, textArea.getText())) {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Save");
-            alert.setHeaderText("Do you want to save changes?");
-            alert.setContentText("Your changes will be lost if you don't save them.");
-            alert.showAndWait();
-            if (alert.getResult() == ButtonType.OK) {
-                onSave();
-            }
-        }
-        textArea.clear();
-        currentFile = null;
+        MainApplication.newWindow();
     }
 
     public void onOpen() {
@@ -48,8 +37,16 @@ public class MainController {
     }
 
     public void onExit() {
-        onNew();
-        System.exit(0);
+        if (MainApplication.isUnsaved(currentFile, textArea.getText())) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Save");
+            alert.setHeaderText("Do you want to save changes?");
+            alert.setContentText("Your changes will be lost if you don't save them.");
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                onSave();
+            }
+        }
     }
 
     public void onDate() {
