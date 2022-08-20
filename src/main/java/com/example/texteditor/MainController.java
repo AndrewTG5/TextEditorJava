@@ -1,14 +1,20 @@
 package com.example.texteditor;
 
+import eu.mihosoft.monacofx.*;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.TextArea;
+import javafx.scene.layout.StackPane;
 
 import java.io.File;
 
 public class MainController {
 
-    public TextArea textArea;
+    public MonacoFX textArea = new MonacoFX();
+    public StackPane editorPane;
+
+    public void initialize() {
+        editorPane.getChildren().add(textArea);
+    }
 
     private File currentFile = null;
 
@@ -19,13 +25,13 @@ public class MainController {
     public void onOpen() {
         currentFile = MainApplication.getFile();
         if (currentFile != null) {
-            textArea.setText(MainApplication.readFile(currentFile));
+            textArea.getEditor().getDocument().setText(MainApplication.readFile(currentFile));
         }
     }
 
     public void onSave() {
         if (currentFile != null) {
-            MainApplication.saveFile(currentFile, textArea.getText());
+            MainApplication.saveFile(currentFile, textArea.getEditor().getDocument().getText());
         } else {
             onSaveAs();
         }
@@ -33,11 +39,11 @@ public class MainController {
 
     public void onSaveAs() {
         currentFile = MainApplication.chooseSaveFile();
-        MainApplication.saveFile(currentFile, textArea.getText());
+        MainApplication.saveFile(currentFile, textArea.getEditor().getDocument().getText());
     }
 
     public void onExit() {
-        if (MainApplication.isUnsaved(currentFile, textArea.getText())) {
+        if (MainApplication.isUnsaved(currentFile, textArea.getEditor().getDocument().getText())) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Save");
             alert.setHeaderText("Do you want to save changes?");
@@ -50,23 +56,22 @@ public class MainController {
     }
 
     public void onDate() {
-        // passing 0 will insert the date at the very beginning of the textArea
-        textArea.insertText(0, MainApplication.getCurrentDateTime());
+        textArea.getEditor().getDocument().setText(MainApplication.getCurrentDateTime() + textArea.getEditor().getDocument().getText());
     }
 
     public void onCut() {
-        textArea.cut();
+        //textArea.cut();
     }
 
     public void onCopy() {
-        textArea.copy();
+        //textArea.copy();
     }
 
     public void onPaste() {
-        textArea.paste();
+        //textArea.paste();
     }
 
     public void onSelectAll() {
-        textArea.selectAll();
+        //textArea.selectAll();
     }
 }

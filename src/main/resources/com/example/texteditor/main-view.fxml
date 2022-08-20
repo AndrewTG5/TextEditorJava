@@ -29,6 +29,6 @@
       <HBox prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="editorPane"/>
    </center>
 </BorderPane>
