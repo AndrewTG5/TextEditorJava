@@ -55,14 +55,18 @@ public class MainController {
     }
 
     public void onCut() {
+        textArea.cut();
     }
 
     public void onCopy() {
+        textArea.copy();
     }
 
     public void onPaste() {
+        textArea.paste();
     }
 
     public void onSelectAll() {
+        textArea.selectAll();
     }
 }
