@@ -80,8 +80,7 @@ public class MainApplication extends Application {
             java.io.BufferedReader bufferedReader = new java.io.BufferedReader(fileReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                content.append(line);
-                content.append(System.lineSeparator());
+                content.append(line).append(System.lineSeparator());
             }
             bufferedReader.close();
         } catch (IOException ex) {
