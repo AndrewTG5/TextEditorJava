@@ -6,6 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.apache.commons.io.FilenameUtils;
+import org.odftoolkit.odfdom.doc.OdfTextDocument;
+import org.odftoolkit.odfdom.dom.element.office.OfficeTextElement;
+import org.odftoolkit.odfdom.dom.element.text.TextPElement;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,11 +38,31 @@ public class MainApplication extends Application {
     public static File getFile() {
         FileChooser fileChooser = new FileChooser();
         // specify allowed file types
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text files (*.txt)", "*.txt"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text files", "*.txt", "*.py", "*.cpp", "*.java", "*.odt"));
         //set initial directory
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
 
         return fileChooser.showOpenDialog(null);
+    }
+
+    /**
+     * Reads the contents of an .odt file and returns them as a String.
+     * @return The contents of the .odt file
+     */
+    public static String readODT(File file) {
+        try (OdfTextDocument doc = OdfTextDocument.loadDocument(file)) {
+            OfficeTextElement officeText = doc.getContentRoot();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < officeText.getChildNodes().getLength(); i++) {
+                if (officeText.getChildNodes().item(i) instanceof TextPElement) {
+                    sb.append(((TextPElement) officeText.getChildNodes().item(i)).getTextContent()).append(System.lineSeparator());
+                }
+            }
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     /**
@@ -47,11 +71,12 @@ public class MainApplication extends Application {
      * @return The content of the file.
      */
     public static String readFile(File file) {
+        if (FilenameUtils.getExtension(file.getName()).equals("odt")) {
+            return readODT(file);
+        }
         StringBuilder content = new StringBuilder();
         try {
-            // FileReader reads text files in the default encoding.
             java.io.FileReader fileReader = new java.io.FileReader(file);
-            // Always wrap FileReader in BufferedReader.
             java.io.BufferedReader bufferedReader = new java.io.BufferedReader(fileReader);
             String line;
             while ((line = bufferedReader.readLine()) != null) {
