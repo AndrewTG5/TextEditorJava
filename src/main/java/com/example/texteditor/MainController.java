@@ -4,7 +4,9 @@ import eu.mihosoft.monacofx.MonacoFX;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
+import javafx.scene.robot.Robot;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
@@ -89,18 +91,34 @@ public class MainController {
     }
 
     public void onCut() {
-        //textArea.cut();
+        Robot r = new Robot();
+        r.keyPress(KeyCode.CONTROL);
+        r.keyPress(KeyCode.X);
+        r.keyRelease(KeyCode.X);
+        r.keyRelease(KeyCode.CONTROL);
     }
 
     public void onCopy() {
-        //textArea.copy();
+        Robot r = new Robot();
+        r.keyPress(KeyCode.CONTROL);
+        r.keyPress(KeyCode.C);
+        r.keyRelease(KeyCode.C);
+        r.keyRelease(KeyCode.CONTROL);
     }
 
     public void onPaste() {
-        //textArea.paste();
+        Robot r = new Robot();
+        r.keyPress(KeyCode.CONTROL);
+        r.keyPress(KeyCode.V);
+        r.keyRelease(KeyCode.V);
+        r.keyRelease(KeyCode.CONTROL);
     }
 
     public void onSelectAll() {
-        //textArea.selectAll();
+        Robot r = new Robot();
+        r.keyPress(KeyCode.CONTROL);
+        r.keyPress(KeyCode.A);
+        r.keyRelease(KeyCode.A);
+        r.keyRelease(KeyCode.CONTROL);
     }
 }
