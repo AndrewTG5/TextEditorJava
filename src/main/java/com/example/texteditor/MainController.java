@@ -1,9 +1,11 @@
 package com.example.texteditor;
 
-import eu.mihosoft.monacofx.*;
+import eu.mihosoft.monacofx.MonacoFX;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
+import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 
@@ -11,12 +13,30 @@ public class MainController {
 
     public MonacoFX textArea = new MonacoFX();
     public StackPane editorPane;
+    public ComboBox<String> language;
+
+    private File currentFile = null;
 
     public void initialize() {
         editorPane.getChildren().add(textArea);
+        language.getItems().add("Plain Text");
+        language.getItems().add("Java");
+        language.getItems().add("C++");
+        language.getItems().add("Python");
+        language.setValue("Plain Text");
     }
 
-    private File currentFile = null;
+    public void onLanguage() {
+        if (language.getValue().equals("Plain Text")) {
+            textArea.getEditor().setCurrentLanguage("plaintext");
+        } else if (language.getValue().equals("Java")) {
+            textArea.getEditor().setCurrentLanguage("java");
+        } else if (language.getValue().equals("C++")) {
+            textArea.getEditor().setCurrentLanguage("cpp");
+        } else if (language.getValue().equals("Python")) {
+            textArea.getEditor().setCurrentLanguage("python");
+        }
+    }
 
     public void onNew() {
         MainApplication.newWindow();
@@ -26,6 +46,15 @@ public class MainController {
         currentFile = MainApplication.getFile();
         if (currentFile != null) {
             textArea.getEditor().getDocument().setText(MainApplication.readFile(currentFile));
+            if (FilenameUtils.getExtension(currentFile.getName()).equals("odt") || FilenameUtils.getExtension(currentFile.getName()).equals("txt")) {
+                language.setValue("Plain Text");
+            } else if (FilenameUtils.getExtension(currentFile.getName()).equals("java")) {
+                language.setValue("Java");
+            } else if (FilenameUtils.getExtension(currentFile.getName()).equals("cpp")) {
+                language.setValue("C++");
+            } else if (FilenameUtils.getExtension(currentFile.getName()).equals("py")) {
+                language.setValue("Python");
+            }
         }
     }
 
@@ -56,7 +85,7 @@ public class MainController {
     }
 
     public void onDate() {
-        textArea.getEditor().getDocument().setText(MainApplication.getCurrentDateTime() + textArea.getEditor().getDocument().getText());
+        textArea.getEditor().getDocument().setText(MainApplication.getCurrentDateTime() + System.lineSeparator() + textArea.getEditor().getDocument().getText());
     }
 
     public void onCut() {

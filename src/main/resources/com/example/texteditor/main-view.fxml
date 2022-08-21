@@ -26,9 +26,11 @@
        </MenuBar>
    </top>
    <bottom>
-      <HBox prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+       <HBox prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+           <ComboBox fx:id="language" onAction="#onLanguage" prefWidth="150.0" />
+       </HBox>
    </bottom>
    <center>
-       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" fx:id="editorPane"/>
+       <StackPane fx:id="editorPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

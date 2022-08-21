@@ -137,6 +137,9 @@ public class MainApplication extends Application {
      * @return True if the file has not been saved.
      */
     public static boolean isUnsaved(File file, String content) {
+        if (content == null) {
+            content = "";
+        }
         if (file == null && content.isEmpty()) {
             return false;
         } else if (file == null) {
