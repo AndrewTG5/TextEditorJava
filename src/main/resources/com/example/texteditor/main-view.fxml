@@ -19,6 +19,7 @@
                <MenuItem mnemonicParsing="false" onAction="#onPaste" text="Paste" />
                <MenuItem mnemonicParsing="false" onAction="#onSelectAll" text="Select all" />
                <MenuItem mnemonicParsing="false" onAction="#onDate" text="Time/Date" />
+               <MenuItem mnemonicParsing="false" onAction="#onFind" text="Find" />
            </Menu>
            <Menu mnemonicParsing="false" text="Help">
                <MenuItem mnemonicParsing="false" text="About" />
@@ -26,9 +27,11 @@
        </MenuBar>
    </top>
    <bottom>
-      <HBox prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
+       <HBox prefHeight="25.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+           <ComboBox fx:id="language" onAction="#onLanguage" prefWidth="150.0" />
+       </HBox>
    </bottom>
    <center>
-      <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+       <StackPane fx:id="editorPane" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

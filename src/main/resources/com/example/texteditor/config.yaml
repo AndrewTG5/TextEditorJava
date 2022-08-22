@@ -1,0 +1,11 @@
+# set parameters for plain text
+fontSize: 70
+fontFamily: Arial
+useLigatures: false
+theme: vs-light
+
+# set parameters for code
+codeFontSize: 12
+codeFontFamily: Fira Code
+codeUseLigatures: true
+codeTheme: vs-dark
