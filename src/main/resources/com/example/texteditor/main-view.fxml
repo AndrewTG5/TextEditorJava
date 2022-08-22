@@ -19,6 +19,7 @@
                <MenuItem mnemonicParsing="false" onAction="#onPaste" text="Paste" />
                <MenuItem mnemonicParsing="false" onAction="#onSelectAll" text="Select all" />
                <MenuItem mnemonicParsing="false" onAction="#onDate" text="Time/Date" />
+               <MenuItem mnemonicParsing="false" onAction="#onFind" text="Find" />
            </Menu>
            <Menu mnemonicParsing="false" text="Help">
                <MenuItem mnemonicParsing="false" text="About" />

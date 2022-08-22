@@ -8,6 +8,7 @@ module com.example.texteditor {
     requires odfdom.java;
     requires org.apache.commons.io;
     requires eu.mihosoft.monacofx;
+    requires org.yaml.snakeyaml;
 
     opens com.example.texteditor to javafx.fxml;
     exports com.example.texteditor;

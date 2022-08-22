@@ -7,17 +7,20 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.robot.Robot;
+import javafx.scene.web.WebEngine;
 import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 
 public class MainController {
 
-    public MonacoFX textArea = new MonacoFX();
     public StackPane editorPane;
     public ComboBox<String> language;
 
+    private final MonacoFX textArea = new MonacoFX();
+    private final WebEngine webEngine = textArea.getWebEngine(); // deprecated but no way around yet
     private File currentFile = null;
+    private final editorConfig config = new editorConfig();
 
     public void initialize() {
         editorPane.getChildren().add(textArea);
@@ -31,13 +34,33 @@ public class MainController {
     public void onLanguage() {
         if (language.getValue().equals("Plain Text")) {
             textArea.getEditor().setCurrentLanguage("plaintext");
+            setConfig(config.getTheme());
         } else if (language.getValue().equals("Java")) {
             textArea.getEditor().setCurrentLanguage("java");
+            setConfig(config.getCodeTheme());
         } else if (language.getValue().equals("C++")) {
             textArea.getEditor().setCurrentLanguage("cpp");
+            setConfig(config.getCodeTheme());
         } else if (language.getValue().equals("Python")) {
             textArea.getEditor().setCurrentLanguage("python");
+            setConfig(config.getCodeTheme());
         }
+    }
+
+    /**
+     * Sets the font size and font family of the editor. Here for de-duplication.
+     * @param config font size
+     * @param config1 font family
+     * @param config2 use ligatures
+     */
+    private void setConfig(int config, String config1, boolean config2) {
+        String script = "var editor = monaco.editor.getModels()[0]; editor.updateOptions({ fontSize: '" + config + "', fontFamily: '" + config1 + "',useLigatures: " + config2 + "}); ";
+        webEngine.executeScript(script);
+    }
+
+    private void setConfig(String config) {
+        String script = "monaco.editor.setTheme('"+config+"') ";
+        webEngine.executeScript(script);
     }
 
     public void onNew() {
@@ -119,6 +142,14 @@ public class MainController {
         r.keyPress(KeyCode.CONTROL);
         r.keyPress(KeyCode.A);
         r.keyRelease(KeyCode.A);
+        r.keyRelease(KeyCode.CONTROL);
+    }
+
+    public void onFind() {
+        Robot r = new Robot();
+        r.keyPress(KeyCode.CONTROL);
+        r.keyPress(KeyCode.F);
+        r.keyRelease(KeyCode.F);
         r.keyRelease(KeyCode.CONTROL);
     }
 }
