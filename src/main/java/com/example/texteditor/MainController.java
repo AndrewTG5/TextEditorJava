@@ -34,16 +34,16 @@ public class MainController {
     public void onLanguage() {
         if (language.getValue().equals("Plain Text")) {
             textArea.getEditor().setCurrentLanguage("plaintext");
-            setConfig(config.getTheme());
+            setConfig(config.getFontSize(), config.getFontFamily(), config.isUseLigatures(), config.getTheme());
         } else if (language.getValue().equals("Java")) {
             textArea.getEditor().setCurrentLanguage("java");
-            setConfig(config.getCodeTheme());
+            setConfig(config.getCodeFontSize(), config.getCodeFontFamily(), config.isCodeUseLigatures(), config.getCodeTheme());
         } else if (language.getValue().equals("C++")) {
             textArea.getEditor().setCurrentLanguage("cpp");
-            setConfig(config.getCodeTheme());
+            setConfig(config.getCodeFontSize(), config.getCodeFontFamily(), config.isCodeUseLigatures(), config.getCodeTheme());
         } else if (language.getValue().equals("Python")) {
             textArea.getEditor().setCurrentLanguage("python");
-            setConfig(config.getCodeTheme());
+            setConfig(config.getCodeFontSize(), config.getCodeFontFamily(), config.isCodeUseLigatures(), config.getCodeTheme());
         }
     }
 
@@ -53,13 +53,8 @@ public class MainController {
      * @param config1 font family
      * @param config2 use ligatures
      */
-    private void setConfig(int config, String config1, boolean config2) {
-        String script = "var editor = monaco.editor.getModels()[0]; editor.updateOptions({ fontSize: '" + config + "', fontFamily: '" + config1 + "',useLigatures: " + config2 + "}); ";
-        webEngine.executeScript(script);
-    }
-
-    private void setConfig(String config) {
-        String script = "monaco.editor.setTheme('"+config+"') ";
+    private void setConfig(int config, String config1, boolean config2, String config3) {
+        String script = "editorView.updateOptions({ fontSize: '" + config + "', fontFamily: '" + config1 + "',fontLigatures: " + config2 + "}); monaco.editor.setTheme('"+config3+"');";
         webEngine.executeScript(script);
     }
 
