@@ -22,7 +22,7 @@
                <MenuItem mnemonicParsing="false" onAction="#onFind" text="Find" />
            </Menu>
            <Menu mnemonicParsing="false" text="Help">
-               <MenuItem mnemonicParsing="false" text="About" />
+               <MenuItem mnemonicParsing="false" onAction="#onAbout" text="About" />
            </Menu>
        </MenuBar>
    </top>

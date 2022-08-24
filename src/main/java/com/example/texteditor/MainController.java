@@ -147,4 +147,12 @@ public class MainController {
         r.keyRelease(KeyCode.F);
         r.keyRelease(KeyCode.CONTROL);
     }
+
+    public void onAbout() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About");
+        alert.setHeaderText("Our group names and IDs: ");
+        alert.setContentText("Andrew Blake - ID # 21009078\nRachel Bell - ID # 20019755");
+        alert.showAndWait();
+    }
 }
