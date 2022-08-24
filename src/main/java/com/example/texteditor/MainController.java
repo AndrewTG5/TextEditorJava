@@ -155,4 +155,19 @@ public class MainController {
         alert.setContentText("Andrew Blake - ID # 21009078\nRachel Bell - ID # 20019755");
         alert.showAndWait();
     }
+
+    public void onPrint() {
+        if (MainApplication.isUnsaved(currentFile, textArea.getEditor().getDocument().getText())){
+            PrinterJob pj = PrinterJob.createPrinterJob();
+            if (pj.showPrintDialog(null)) {
+                webEngine.print(pj);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Empty Document");
+            alert.setHeaderText("Your document is empty! ");
+            alert.setContentText("Please enter in some text in order to print");
+            alert.showAndWait();
+        }
+    }
 }
