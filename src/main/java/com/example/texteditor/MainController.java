@@ -1,6 +1,7 @@
 package com.example.texteditor;
 
 import eu.mihosoft.monacofx.MonacoFX;
+import javafx.print.PrinterJob;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
