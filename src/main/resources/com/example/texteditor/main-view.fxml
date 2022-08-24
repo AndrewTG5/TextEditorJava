@@ -11,6 +11,7 @@
                <MenuItem mnemonicParsing="false" onAction="#onOpen" text="Open" />
                <MenuItem mnemonicParsing="false" onAction="#onSave" text="Save" />
                <MenuItem mnemonicParsing="false" onAction="#onSaveAs" text="Save as" />
+               <MenuItem mnemonicParsing="false" onAction="#onPrint" text="Print" />
                <MenuItem mnemonicParsing="false" onAction="#onExit" text="Exit" />
            </Menu>
            <Menu mnemonicParsing="false" text="Edit">
