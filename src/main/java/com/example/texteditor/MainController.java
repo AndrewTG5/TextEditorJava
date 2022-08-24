@@ -53,6 +53,7 @@ public class MainController {
      * @param config font size
      * @param config1 font family
      * @param config2 use ligatures
+     * @param config3 theme
      */
     private void setConfig(int config, String config1, boolean config2, String config3) {
         String script = "editorView.updateOptions({ fontSize: '" + config + "', fontFamily: '" + config1 + "',fontLigatures: " + config2 + "}); monaco.editor.setTheme('"+config3+"');";
@@ -158,17 +159,12 @@ public class MainController {
     }
 
     public void onPrint() {
-        if (MainApplication.isUnsaved(currentFile, textArea.getEditor().getDocument().getText())){
-            PrinterJob pj = PrinterJob.createPrinterJob();
-            if (pj.showPrintDialog(null)) {
-                webEngine.print(pj);
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if (job != null && job.showPrintDialog(null)) {
+            boolean success = job.printPage(textArea);
+            if (success) {
+                job.endJob();
             }
-        } else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Empty Document");
-            alert.setHeaderText("Your document is empty! ");
-            alert.setContentText("Please enter in some text in order to print");
-            alert.showAndWait();
         }
     }
 }
