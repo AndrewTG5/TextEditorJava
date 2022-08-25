@@ -3,5 +3,7 @@
 
 Andrew Blake - 21009078
 
+Rachel Bell - 20019755
+
 
 To run the program use the maven goal javafx:run found under Maven -> Plugins -> javafx -> javafx:run
