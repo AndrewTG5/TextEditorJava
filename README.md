@@ -1,6 +1,8 @@
 # TextEditorJava
 ![Build Status](https://github.com/andrewthegreat5/251-Assignment1-2022-Andrew-Rachel/actions/workflows/CI.yml/badge.svg)
 
+![Screenshot of the app with some code showing working syntax highlighting](SS.png)
+
 Made for Massey University assignment in 2022
 
 To run the program use the maven goal javafx:run found under Maven -> Plugins -> javafx -> javafx:run
